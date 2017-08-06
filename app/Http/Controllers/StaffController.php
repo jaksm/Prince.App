@@ -89,7 +89,12 @@ class StaffController extends Controller
         $posada = Staff::find($id);
 
         $posada -> ime_prezime = request('ime');
-        $posada -> pozicija = request('uloga');
+
+        if (request('uloga') == null) {
+          $posada -> pozicija = $posada -> pozicija;
+        } else {
+          $posada -> pozicija = request('uloga');
+        }
 
         $posada -> save();
 
