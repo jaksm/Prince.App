@@ -91,9 +91,12 @@ class AirplaneController extends Controller
     public function update(Request $request, $id)
     {
       $avion = Airplane::find($id);
-
       $avion -> registracija = request('registracija');
-      $avion -> tip = request('tip');
+      if (request('tip') == null) {
+        $avion -> tip = $avion -> tip;
+      } else {
+        $avion -> tip = request('tip');
+      }
       $avion -> telefon = request('tel');
 
       $avion -> save();
