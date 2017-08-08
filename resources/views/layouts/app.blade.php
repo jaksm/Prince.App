@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-      <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
@@ -103,11 +103,9 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{asset('js/jquery.js')}}" charset="utf-8"></script>
-    <script src="{{ asset('js/nouislider.min.js') }}"></script>
+    {{-- <script src="{{asset('js/jquery.js')}}"></script> --}}
     <script src="{{ asset('js/moment.js') }}"></script>
-    <script src="{{ asset('js/datepicker.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 </html>

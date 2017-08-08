@@ -8,8 +8,7 @@
 require('./bootstrap');
 require('./material.js');
 require('./ripples.js');
-require('./calendarPlugin.js');
-require('./callendar.js');
+require('./custom.js');
 
 
 // window.Vue = require('vue');
@@ -28,7 +27,3 @@ require('./callendar.js');
 
 
 $.material.init()
-
-$(function () {
-    $('#datetimepicker1').datetimepicker();
-});
