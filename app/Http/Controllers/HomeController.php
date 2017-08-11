@@ -24,8 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $datePicked = request('datePicked');
+
+        // Dates
+
+        $datePicked = Carbon::now();
+
+        if (request('datePicked') != null) {
+          $datePicked = request('datePicked');
+        }
         $startDate = Carbon::parse($datePicked);
+        $startDateRaw = $startDate->format('Y-m-d');
         $startDateFormatted = $startDate->format('l d.');
         $intSelected = 7;
 
@@ -36,9 +44,14 @@ class HomeController extends Controller
           }
         }
 
+        if ($datePicked !== null) {
 
+          for ($i = 1 ; $i <= $intSelected; $i++) {
+              $datesRaw[] = $startDate->copy()->addDays($i)->format('Y-m-d');
+          }
+        }
 
         $airplanes = \App\Airplane::all();
-        return view('home', compact('airplanes', 'startDateFormatted', 'dates'));
+        return view('home', compact('airplanes', 'startDateFormatted', 'dates', 'startDate', 'datesRaw', 'startDateRaw'));
     }
 }

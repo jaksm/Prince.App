@@ -73,6 +73,15 @@ class Flight extends Model
       return $avion;
     }
 
+    static function calData($airplanes_id, $poletanje)
+    {
+
+      $data = Flight::where('airplanes_id', $airplanes_id)->whereDate('poletanje', $poletanje)->get();
+
+
+      return $data;
+    }
+
 
 
 

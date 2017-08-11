@@ -746,7 +746,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(8);
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(38);
 
 
 /***/ }),
@@ -763,7 +763,7 @@ module.exports = __webpack_require__(39);
 __webpack_require__(9);
 __webpack_require__(35);
 __webpack_require__(36);
-__webpack_require__(49);
+__webpack_require__(37);
 
 // window.Vue = require('vue');
 //
@@ -781,6 +781,14 @@ __webpack_require__(49);
 
 
 $.material.init();
+
+$(function () {
+  $("#datepicker").datepicker();
+});
+
+$(document).ready(function () {
+  $('[data-toggle="tooltip"]').tooltip({ 'placement': 'right' });
+});
 
 /***/ }),
 /* 9 */
@@ -32312,24 +32320,7 @@ module.exports = function spread(callback) {
 })(jQuery, window, document);
 
 /***/ }),
-/* 37 */,
-/* 38 */,
-/* 39 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */
+/* 37 */
 /***/ (function(module, exports) {
 
 ///// Calendar
@@ -32345,6 +32336,12 @@ $(function () {
 $("#myButton").click(function () {
   $("#datepicker").datepicker("show");
 });
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

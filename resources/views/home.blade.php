@@ -8,40 +8,10 @@
   {{-- Opcije --}}
   <div class="options">
     <form action="{{route('home')}}" method="get">
-      <input type="text" id="datepicker" name="datePicked" onchange='this.form.submit()'>
-      <button type="button" name="button" id="myButton" class="btn"><i class="material-icons">date_range</i></button>
-    </form>
-
-
-<form class="" action="index.html" method="post">
-  <select class="" name="">
-    <option value="">Nedelju dana</option>
-    <option value="">Mesec dana</option>
-  </select>
-</form>
-
-
-    <select class="" name="">
-      @foreach ($airplanes as $airplane)
-        <option value="{{$airplane->id}}">{{$airplane->registracija}}</option>
-      @endforeach
-    </select>
-    {{-- <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Dropdown
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li role="separator" class="divider"></li>
-        <li><a href="#">Separated link</a></li>
-      </ul>
-    </div> --}}
+      <i class="material-icons">date_range</i>
+      <input type="date" id="datepicker" name="datePicked" onchange='this.form.submit()'>
   </div>
-
-  <table class="table table-striped table-hover">
+  <table class="table table-bordered table-hover">
     <thead>
       {{-- Datumi u nedelji --}}
       <tr>
@@ -58,17 +28,48 @@
       @foreach ($airplanes as $airplane)
         <tr>
           <th>{{$airplane->registracija}}</th>
-          <td>Podaci za 1</td>
-          <td>Podaci za 2</td>
-          <td>Podaci za 3</td>
-          <td>Podaci za 4</td>
-          <td>Podaci za 5</td>
-          <td>Podaci za 6</td>
-          <td>Podaci za 7</td>
-          <td>Podaci za 7</td>
+          <td>
+            @foreach (\App\Flight::calData($airplane -> id, $startDateRaw) as $data)
+              <a type="button" data-toggle="tooltip" data-placement="right" title="<h4>Broj leta <strong>{{$data->id}}</strong></h4><hr><p>{{$data->poletanje}} - {{$data->sletanje}}</p><p>{{$data->client_id}}</p>" data-html="true">{{$data->sletanje}}</a>
+            @endforeach
+          </td>
+          <td>
+            @foreach (\App\Flight::calData($airplane -> id, $datesRaw[0]) as $data)
+              <a type="button" data-toggle="tooltip" data-placement="right" title="<h4>Broj leta <strong>{{$data->id}}</strong></h4><hr><p>{{$data->poletanje}} - {{$data->sletanje}}</p><p>{{$data->client_id}}</p>" data-html="true">{{$data->sletanje}}</a>
+            @endforeach
+          </td>
+          <td>
+            @foreach (\App\Flight::calData($airplane -> id, $datesRaw[1]) as $data)
+              <a type="button" data-toggle="tooltip" data-placement="right" title="<h4>Broj leta <strong>{{$data->id}}</strong></h4><hr><p>{{$data->poletanje}} - {{$data->sletanje}}</p><p>{{$data->client_id}}</p>" data-html="true">{{$data->sletanje}}</a>
+            @endforeach
+          </td>
+          <td>
+            @foreach (\App\Flight::calData($airplane -> id, $datesRaw[2]) as $data)
+              <a type="button" data-toggle="tooltip" data-placement="right" title="<h4>Broj leta <strong>{{$data->id}}</strong></h4><hr><p>{{$data->poletanje}} - {{$data->sletanje}}</p><p>{{$data->client_id}}</p>" data-html="true">{{$data->sletanje}}</a>
+            @endforeach
+          </td>
+          <td>
+            @foreach (\App\Flight::calData($airplane -> id, $datesRaw[3]) as $data)
+              <a type="button" data-toggle="tooltip" data-placement="right" title="<h4>Broj leta <strong>{{$data->id}}</strong></h4><hr><p>{{$data->poletanje}} - {{$data->sletanje}}</p><p>{{$data->client_id}}</p>" data-html="true">{{$data->sletanje}}</a>
+            @endforeach
+          </td>
+          <td>
+            @foreach (\App\Flight::calData($airplane -> id, $datesRaw[4]) as $data)
+              <a type="button" data-toggle="tooltip" data-placement="right" title="<h4>Broj leta <strong>{{$data->id}}</strong></h4><hr><p>{{$data->poletanje}} - {{$data->sletanje}}</p><p>{{$data->client_id}}</p>" data-html="true">{{$data->sletanje}}</a>
+            @endforeach
+          </td>
+          <td>
+            @foreach (\App\Flight::calData($airplane -> id, $datesRaw[5]) as $data)
+              <a type="button" data-toggle="tooltip" data-placement="right" title="<h4>Broj leta <strong>{{$data->id}}</strong></h4><hr><p>{{$data->poletanje}} - {{$data->sletanje}}</p><p>{{$data->client_id}}</p>" data-html="true">{{$data->sletanje}}</a>
+            @endforeach
+          </td>
+          <td>
+            @foreach (\App\Flight::calData($airplane -> id, $datesRaw[6]) as $data)
+              <a type="button" data-toggle="tooltip" data-placement="right" title="<h4>Broj leta <strong>{{$data->id}}</strong></h4><hr><p>{{$data->poletanje}} - {{$data->sletanje}}</p><p>{{$data->client_id}}</p>" data-html="true">{{$data->sletanje}}</a>
+            @endforeach
+          </td>
         </tr>
       @endforeach
-
     </tbody>
   </table>
 </div>

@@ -27,3 +27,12 @@ require('./custom.js');
 
 
 $.material.init()
+
+$( function() {
+  $( "#datepicker" ).datepicker();
+} );
+
+
+$( document ).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip({'placement': 'right'});
+});
