@@ -25,6 +25,10 @@ class HomeController extends Controller
     public function index()
     {
 
+      // NOTE: test
+
+
+
         // Dates
 
         $datePicked = Carbon::now();

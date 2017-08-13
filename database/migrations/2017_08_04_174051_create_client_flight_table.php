@@ -15,8 +15,8 @@ class CreateClientFlightTable extends Migration
     {
         Schema::create('client_flights', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id');
-            $table->integer('flight_id');
+            $table->integer('client_id')->nullable();
+            $table->integer('flight_id')->nullable();
             $table->timestamps();
         });
     }

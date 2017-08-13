@@ -15,8 +15,8 @@ class CreateFlightStaffsTable extends Migration
     {
         Schema::create('flight_staffs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('flight_id');
-            $table->integer('staffs_id');
+            $table->integer('flight_id')->nullable();
+            $table->integer('staffs_id')->nullable();
             $table->timestamps();
         });
     }

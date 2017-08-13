@@ -19,6 +19,10 @@ Route::get('/home/calendar', function () {
     return view('user.calendar');
 });
 
+Route::get('/home/flight/create/autocomplete',array('as'=>'autocomplete','uses'=>'FlightController@autocomplete'));
+Route::get('/home/flight/create/posada',array('as'=>'posada','uses'=>'FlightController@posada'));
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

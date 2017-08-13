@@ -1,13 +1,22 @@
 ///// Calendar
 // Options
-$( function() {
-  $( "#datepicker" ).datepicker({
-    showOn: "button",
-    buttonImageOnly: true,
-    buttonText: ""
-  });
-});
+$('document').ready(function() {
+  var path = "http://prince.app/home/flight/create/autocomplete";
+  var anotherpath = "http://prince.app/home/flight/create/posada";
 
-$("#myButton").click(function() {
-  $("#datepicker").datepicker("show");
+  $('#clientNaziv').typeahead({
+      source:  function (query, process) {
+      return $.get(path, { query: query }, function (data) {
+              return process(data);
+          });
+      }
+  });
+
+  $('#staffsID').typeahead({
+      source:  function (query, process) {
+      return $.get(anotherpath, { query: query }, function (data) {
+              return process(data);
+          });
+      }
+  });
 });

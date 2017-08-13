@@ -6,8 +6,10 @@
  */
 
 require('./bootstrap');
+require('./bootstrap-tagsinput.js');
 require('./material.js');
 require('./ripples.js');
+require('./bootstraptypehead.js');
 require('./custom.js');
 
 
@@ -28,11 +30,20 @@ require('./custom.js');
 
 $.material.init()
 
-$( function() {
-  $( "#datepicker" ).datepicker();
-} );
+// $( function() {
+//   $( "#datepicker" ).datepicker();
+// });
 
 
 $( document ).ready(function() {
     $('[data-toggle="tooltip"]').tooltip({'placement': 'right'});
+});
+
+// Let create
+
+
+$("#clientNaziv", "#staffsID").tagsinput('items');
+
+$('form').on('keypress', function(e) {
+    return e.which !== 13;
 });

@@ -9,10 +9,6 @@
           <form class="form-horizontal" method="POST" action="{{ route('flight.store') }}">
               {{ csrf_field() }}
 
-
-
-
-
               <div class="form-group{{ $errors->has('poletanje') ? ' has-error' : '' }}">
                   <label for="poletanje" class="col-md-4 control-label">Poletanje</label>
 
@@ -69,7 +65,8 @@
                   <label for="client_naziv" class="col-md-4 control-label">Klijent</label>
 
                   <div class="col-md-6">
-                      <input id="client_naziv" type="text" class="form-control" name="client_naziv" value="{{ old('client_naziv') }}" required autofocus>
+
+                    <select class="typeahead" multiple data-role="tagsinput" id="clientNaziv" name="client_naziv[]" placeholder="Search or Create"></select>
 
                       @if ($errors->has('client_naziv'))
                           <span class="help-block">
@@ -120,11 +117,7 @@
 
                   <div class="col-md-6">
 
-                      <select id="staffs_id" type="number" class="form-control" name="staffs_id" required autofocus>
-                       @foreach ($clanovi as $clan)
-                         <option value="{{$clan->id}}">{{$clan->ime_prezime}}</option>
-                       @endforeach
-                      </select>
+                    <select multiple data-role="tagsinput" id="staffsID" name="staffs_id[]"></select>
 
                       @if ($errors->has('staffs_id'))
                           <span class="help-block">
@@ -133,10 +126,6 @@
                       @endif
                   </div>
               </div>
-
-
-
-
 
               <div class="form-group">
                   <div class="col-md-6 col-md-offset-4">

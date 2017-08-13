@@ -36,33 +36,40 @@ class Flight extends Model
     {
       $let = Flight::find($id);
       $polazna = $let->ruta()->get()->pluck('polazna_dest');
-
-      return $polazna;
+      $polaznaNaziv = \App\Destination::find($polazna)->pluck('naziv')[0];
+      return $polaznaNaziv;
     }
 
     static function dolaznaDestLeta($id)
     {
       $let = Flight::find($id);
       $dolazna = $let->ruta()->get()->pluck('dolazna_dest');
+      $dolaznaNaziv = \App\Destination::find($dolazna)->pluck('naziv')[0];
 
-      return $dolazna;
+      return $dolaznaNaziv;
     }
 
     static function klijentLeta($id)
     {
-      $let = Flight::find($id);
-      $klijent = $let->klijent()->get()->pluck('naziv');
+      $klijent_id = \App\ClientFlight::all()->where('flight_id', $id)->pluck('client_id');
+      $klijenti = [];
+      foreach ($klijent_id as $id) {
+        $klijent = \App\Client::find($id);
+        $klijenti[] = $klijent;
+      }
 
-      return $klijent;
+      return $klijenti;
     }
 
     static function posadaLeta($id)
     {
-      $let = Flight::find($id);
-      $posada = $let->posada()->pluck('staffs_id');
-      $osoblje_id = \App\FlightStaff::all()->where('flight_id', $let->id)->pluck('staffs_id');
-
-      return $osoblje_id;
+      $osoblje_id = \App\FlightStaff::all()->where('flight_id', $id)->pluck('staffs_id');
+      $osoblje = [];
+      foreach ($osoblje_id as $id) {
+        $letac = \App\Staff::find($id);
+        $osoblje[] = $letac;
+      }
+      return $osoblje;
     }
 
     static function avionLeta($airplanes_id)
@@ -83,6 +90,12 @@ class Flight extends Model
     }
 
 
+    static function dateMutator($date)
+    {
+      $start = \Carbon\Carbon::parse($date);
+      $mutated = $start ->format('h:i A');
 
+      return $mutated;
+    }
 
 }
