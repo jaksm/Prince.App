@@ -15,6 +15,7 @@
       rel="stylesheet">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link href="{{ asset('css/bootstrap-tagsinput.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.tablesorter.pager.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>

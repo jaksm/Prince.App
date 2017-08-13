@@ -17,10 +17,10 @@ class CreateFlightsTable extends Migration
             $table->increments('id');
             $table->integer('flight_routes_id')->nullable();
             // $table->integer('client_id')->nullable();
-            $table->dateTimeTz('poletanje');
-            $table->dateTimeTz('sletanje');
+            $table->dateTimeTz('poletanje')->nullable();
+            $table->dateTimeTz('sletanje')->nullable();
             $table->integer('flight_staffs_id')->nullable();
-            $table->integer('airplanes_id');
+            $table->integer('airplanes_id')->nullable();
             $table->timestamps();
         });
     }

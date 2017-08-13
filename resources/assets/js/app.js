@@ -10,6 +10,8 @@ require('./bootstrap-tagsinput.js');
 require('./material.js');
 require('./ripples.js');
 require('./bootstraptypehead.js');
+require('./jquery.tablesorter.combined.js');
+require('./jquery.tablesorter.pager.min.js');
 require('./custom.js');
 
 

@@ -26,8 +26,7 @@ class FlightController extends Controller
     public function index()
     {
         $letovi = Flight::all();
-        // $k = Flight::posadaLeta(2);
-        // dd($k);
+
         return view('user.let', compact('letovi'));
     }
 
@@ -53,97 +52,31 @@ class FlightController extends Controller
     public function store(Request $request)
     {
 
-        // Popuni polja flights.poletanje, sletanje, airplanes_id
-
-        $let = new Flight;
-        $let -> poletanje = request('poletanje');
-        $let -> sletanje = request('sletanje');
-        $let -> airplanes_id = request('airplanes_id');
-        $let -> save();
-
-        // Napravi klijente
-        $br_klijenata = count(request('client_naziv'));
-        foreach (request('client_naziv') as $check) {
-          if (\App\Client::where('naziv', $check)->exists()) {
-            $id = \App\Client::where('naziv', $check)->get()->pluck('id')[0];
-            $client = \App\Client::find($id);
-          } else {
-            if ($check instanceof Collection) {
-              foreach ($check as $client) {
-              \App\Client::create([
-                              'naziv' => $client
-                              ]);
-              }
-            } else {
-              \App\Client::create([
-                              'naziv' => $check
-                              ]);
-            }
-
-          }
-        }
+        $poletanje = request('poletanje');
+        $sletanje = request('sletanje');
+        $airplanes_id = request('airplanes_id');
+        $polazna_dest = request('polazna_dest');
+        $dolazna_dest = request('dolazna_dest');
+        $naziv = request('client_naziv');
+        $staffs_id = request('staffs_id');
 
 
-
-        // Napravi rutu
-        $ruta = new \App\FlightRoute;
-        $ruta -> polazna_dest = request('polazna_dest');
-        $ruta -> dolazna_dest = request('dolazna_dest');
-        $ruta -> save(); // BUG: ovde mora da postoji pivot tabela let.ruta zato sto ista ruta moze da se pojavi u dva leta
-
-        // Nadji poslednju rutu i dodaj je poslenjem letu
-        $ruta = \App\FlightRoute::orderBy('created_at', 'DESC')->first()->id; // BUG: tako da ovde mora da ide where id leta = id rute
-        $let = Flight::orderBy('created_at', 'DESC')->first();
-        $let -> flight_routes_id = $ruta;
-        $let -> save();
-
-        // Sastavi posadu
-        foreach (request('staffs_id') as $staff) {
-          \App\FlightStaff::create([
-            'staffs_id' => \App\Staff::where('ime_prezime', $staff)->pluck('id')[0],
-            'flight_id' => $let->id,
-          ]);
-        }
-
-        // Nadji poslednju posadu i poslednji let i dodaj mu id posade
-        $posada = \App\FlightStaff::orderBy('created_at', 'DESC')->first()->id;
-        $let = Flight::orderBy('created_at', 'DESC')->first();
-        $let -> flight_staffs_id = $posada;
-        $let -> save();
-
-        // Nadji pravog klijenta
-        foreach (request('client_naziv') as $check) {
-          $clients[]= \App\Client::where('naziv', $check)->get()[0];
-        }
-
-
-        // $let = Flight::orderBy('created_at', 'DESC')->first();
-        // $let -> client_id = \App\Client::orderBy('created_at', 'DESC')->first()->id;
-        // $let -> save();
-
-        // Dodaj prave klijente u pivot tabelu
-
-            foreach ($clients as $client) {
-              $clientFlight = new \App\ClientFlight;
-              $clientFlight -> client_id = $client->id; // BUG: ovo se uopste ne exe
-              $clientFlight -> flight_id = $let->id;
-              $clientFlight -> save();
-            }
+        Flight::newFlight($poletanje, $sletanje, $airplanes_id, $polazna_dest, $dolazna_dest, $naziv, $staffs_id);
 
 
 
         // Napravi izvestaj
-        \App\LetExport::create([
-          'id_leta' => $let->id,
-          'polazna_dest_icao' => 'U procesu',
-          'dolazna_dest_icao' => 'u Procesu',
-          'vreme_poletanja' => $let->poletanje,
-          'vreme_sletanja' => $let->sletanje,
-          'kapetan' => 'U procesu',
-          'kopilot' => 'U procesu',
-          'stjuardesa' => 'U procesu',
-          'registracija_aviona' => 'U procesu',
-        ]);
+        // \App\LetExport::create([
+        //   'id_leta' => $let->id,
+        //   'polazna_dest_icao' => 'U procesu',
+        //   'dolazna_dest_icao' => 'u Procesu',
+        //   'vreme_poletanja' => $let->poletanje,
+        //   'vreme_sletanja' => $let->sletanje,
+        //   'kapetan' => 'U procesu',
+        //   'kopilot' => 'U procesu',
+        //   'stjuardesa' => 'U procesu',
+        //   'registracija_aviona' => 'U procesu',
+        // ]);
 
         // Redirektuj na tabelu svih letova
         return redirect('home/flight');
