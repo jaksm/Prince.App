@@ -3,8 +3,11 @@
   @include('inc.user.mod-links')
 @endsection
 @section('content')
-<div class="jumbotron col-sm-11 col-xs-12">
-    <table class="table tablesorter table-striped table-hover ">
+<div class="panel">
+  <div class="panel-heading">
+    <h2>Pregled Letova</h2>
+  </div>
+<div class="panel-body">    <table class="tablesorter table-hover ">
       <thead>
       <tr>
         <th>#</th>
@@ -16,30 +19,7 @@
         <th>Kopilot</th>
         <th>Stjuardesa</th>
       </tr>
-      <button type="button" class="btn btn-default prev reset"><span>Reset</span></button>
       </thead>
-      <tfoot>
-        <tr>
-          <th colspan="8" class="ts-pager form-inline">
-            <div class="btn-group btn-group-sm" role="group">
-              <button type="button" class="btn btn-default first"><span class="glyphicon glyphicon-step-backward"></span></button>
-              <button type="button" class="btn btn-default prev"><span class="glyphicon glyphicon-backward"></span></button>
-            </div>
-            <span class="pagedisplay"></span>
-            <div class="btn-group btn-group-sm" role="group">
-              <button type="button" class="btn btn-default next"><span class="glyphicon glyphicon-forward"></span></button>
-              <button type="button" class="btn btn-default last"><span class="glyphicon glyphicon-step-forward"></span></button>
-            </div>
-            <select class="form-control input-sm pagesize" title="Select page size">
-              <option selected="selected" value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="all">All Rows</option>
-            </select>
-            <select class="form-control input-sm pagenum" title="Select page number"></select>
-          </th>
-        </tr>
-      </tfoot>
       <tbody>
         @foreach ($letovi as $let)
           <tr>
@@ -79,6 +59,29 @@
           </tr>
         @endforeach
       </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="8" class="ts-pager form-inline">
+              <div class="btn-group btn-group-sm" role="group">
+                <button type="button" class="btn btn-default first"><span class="glyphicon glyphicon-step-backward"></span></button>
+                <button type="button" class="btn btn-default prev"><span class="glyphicon glyphicon-backward"></span></button>
+              </div>
+              <span class="pagedisplay"></span>
+              <div class="btn-group btn-group-sm" role="group">
+                <button type="button" class="btn btn-default next"><span class="glyphicon glyphicon-forward"></span></button>
+                <button type="button" class="btn btn-default last"><span class="glyphicon glyphicon-step-forward"></span></button>
+              </div>
+              <select class="form-control input-sm pagesize" title="Select page size">
+                <option selected="selected" value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="all">All Rows</option>
+              </select>
+              <select class="form-control input-sm pagenum" title="Select page number"></select>
+            </th>
+          </tr>
+        </tfoot>
+    </table></div>
 </div>
 </div>
 @endsection

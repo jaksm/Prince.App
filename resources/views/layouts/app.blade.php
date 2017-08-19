@@ -16,91 +16,60 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link href="{{ asset('css/bootstrap-tagsinput.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.tablesorter.pager.min.css') }}" rel="stylesheet">
+    @yield('css-links')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
+        <div id="sidebar-wrapper">
+        <a class="navbar-brand" href="{{ url('/') }}"></a>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+        <!-- Authentication Links -->
+        @if (Auth::guest())
+            {{-- <li><a href="{{ route('login') }}">Login</a></li> --}}
+            {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
+        @else
+        <div class="avatar-wrapper">
+            <img src="{{asset('img/avatar.jpg')}}" class="img-circle" id="avatar-img">
+        </div>
+        <ul class="nav avatar">
+            <li class="dropdown text-center">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{-- {{ config('app.name', 'Laravel') }} - {{ Auth::user()->name }} --}}
-                      {{-- @if (Route::currentRouteName() == 'admin.dashboard')
-                        {{ config('app.name', 'Laravel') }} - Admin
-                      @endif
-                      @if (Route::currentRouteName() == 'home')
-                        {{ config('app.name', 'Laravel') }} - Korisnik (uloga)
-                      @endif --}}
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a style="color: #1d1d1d" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
 
-                    </a>
-                </div>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        @endif
+        <ul class="nav">
+            @yield('mod-links')
+            <li><img id="logo" src="{{ asset('img/logo.png') }}"></li>
+        </ul>
+        </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav" id="hidden-nav">
-                      @include('inc.admin.mod-links')
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            {{-- <li><a href="{{ route('login') }}">Login</a></li> --}}
-                            {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+        <div id="content-wrapper">
+        @include('inc.user.nav')
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                    @yield('content')
+                    </div>
                 </div>
             </div>
-        </nav>
-
-        <div class="content-wrapper">
-          <div class="container-fluid">
-
-            <div class="col-sm-3 no-padd">
-              <div class="collapse navbar-collapse no-padd">
-                <div class="navbar sidebar">
-                  <ul class="nav navbar-nav">
-                      @yield('mod-links')
-                  </ul>
-                </div>
-              </div>
-            </div>
-              <div class="col-sm-9 content">
-                @yield('content')
-              </div>
-          </div>
-
         </div>
     </div>
 
@@ -108,6 +77,7 @@
     <script src="{{asset('js/jquery.js')}}"></script>
     {{-- <script src="{{ asset('js/moment.js') }}"></script> --}}
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 
 </body>
 </html>

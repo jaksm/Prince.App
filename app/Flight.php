@@ -93,7 +93,7 @@ class Flight extends Model
       return $avion;
     }
 
-    public function calData($airplanes_id, $poletanje)
+    static function calData($airplanes_id, $poletanje)
     {
 
       $data = Flight::where('airplanes_id', $airplanes_id)->whereDate('poletanje', $poletanje)->get();
@@ -110,6 +110,7 @@ class Flight extends Model
 
       return $mutated;
     }
+
 
 
    // Novi let
@@ -186,6 +187,21 @@ class Flight extends Model
         ]);
       }
 
+   }
+
+
+   static function destinacije($flight_routes_id)
+   {
+     // Nadji ID polazne i dolazne dest
+     $polazna_id = FlightRoute::find($flight_routes_id)->polazna_dest;
+     $dolazna_id = FlightRoute::find($flight_routes_id)->dolazna_dest;
+
+     // Nadji nazive polazne i dolazne dest - kolekcije
+     $destinacije = [];
+     $destinacije[]= Destination::find($polazna_id);
+     $destinacije[]= Destination::find($dolazna_id);
+
+     return $destinacije;
    }
 
 }

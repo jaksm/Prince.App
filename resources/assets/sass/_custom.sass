@@ -35,5 +35,38 @@
   transform: translateY(50%)
 
 // Calendar options
-.options
-  padding: 20px 8px
+
+#airplane-add
+  position: absolute
+  left: 50%
+  top: 0
+  transform: translate(-50%, -50% )
+
+.curent-column
+  background-color: lighten($deep-orange, 25%)
+
+.calendar
+  table-layout: fixed
+  word-wrap: break-word
+  td, th
+    width: 11.25%
+  td
+    padding: 0 !important
+    a
+      cursor: pointer
+      transition: color .15s ease-in-out
+    a:hover
+      color: darken(white, 20%)
+  .avion-reg
+    width: 10%
+    
+// nav
+
+.navbar-default
+  margin-bottom: 30px
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+
+#toggleMenu
+  position: absolute
+  right: 0
+  

@@ -1,3 +1,9 @@
+/// Sidebar Toggle
+$('#toggleMenu').click(function(e){
+  e.preventDefault();
+  $("#app").toggleClass("MenuDisplayed")
+})
+
 ///// Calendar
 // Options
 $('document').ready(function() {
@@ -30,7 +36,7 @@ $(function() {
   $.tablesorter.themes.bootstrap = {
     // these classes are added to the table. To see other table classes available,
     // look here: http://getbootstrap.com/css/#tables
-    table        : 'table table-bordered table-striped',
+    table        : 'table table-striped',
     caption      : 'caption',
     // header class names
     header       : 'bootstrap-header', // give the header a gradient background (theme.bootstrap_2.css)
@@ -104,3 +110,6 @@ $(function() {
   });
 
 });
+
+
+// fullcalendar

@@ -1,18 +1,55 @@
-.sidebar-wrapper
-  padding-left: 0
-  position: fixed
-  .navbar-collapse
-    padding: 0
+#sidebar-wrapper
+  z-index: 1
+  position: absolute
+  width: 0
+  height: 100%
+  overflow-y: hidden
+  background-color: $component-primary
+  opacity: .9
+  transition: width .15s ease-in-out
 
-.sidebar
-  background-color: lighten($brand-primary, 10%)
-  position: fixed
-  width: 250px
-  height: calc( 100vh - 62px )
-  margin: 0
-  // margin-top: -75px
-  ul
-    width: 100%
-    li
-      width: 100%
-      font-size: 1.2em
+#content-wrapper
+  width: 100%
+  position: absolute
+
+#app.MenuDisplayed
+  #sidebar-wrapper
+    width: 250px
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    .material-icons
+      color: white
+      font-size: 2em
+      
+  #content-wrapper
+    padding-left: 250px
+    transition: padding-left .1s ease-in-out
+
+.avatar-wrapper
+  height: 150px
+  width: 100%
+  display: flex
+
+#avatar-img
+  width: 60%
+  border: 2px solid $mdb-text-color-light-hex
+  margin: auto
+  transition: border-color .2s ease-in-out;
+
+#avatar-img:hover
+  border-color: $brand-primary
+
+.avatar
+  margin: 0;
+
+#toggler
+  color: white
+  font-size: 2.5em
+
+#toggleMenu
+  padding: 13px
+
+#logo
+  transform: scale(.7)
+  position: absolute
+  right: -18px
+  bottom: -130px

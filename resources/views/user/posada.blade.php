@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="col-sm-11 col-xs-12">
+<div class="">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2>Posada</h2>
@@ -17,16 +17,16 @@
         @foreach ($posada as $radnik)
           <div class="list-group-item">
             <div class="row-picture">
-              <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+              <img class="circle" src="{{ asset('img/avatar.jpg') }}" alt="{{$radnik -> ime_prezime}}">
             </div>
             <div class="row-content">
-              <div class="col-xs-8">
+              <div class="col-xs-9">
                 <h4 class="list-group-item-heading"><a href="#"></a>{{$radnik -> ime_prezime}}</h4>
 
                 <span class="label label-default">{{$radnik -> pozicija}}</span>
 
               </div>
-              <div class="col-xs-4">
+              <div class="col-xs-3">
                 <a href="{{'staff/'.$radnik->id.'/edit'}}" class="btn btn-primary btn-fab-mini"><i class="material-icons">create</i></a>
                 <form style="display:inline;" action="{{'staff/'.$radnik->id}}" method="post">
                   {{ csrf_field() }}

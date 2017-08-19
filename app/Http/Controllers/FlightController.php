@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Flight;
+use App\EventModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+use MaddHatter\LaravelFullcalendar\Event;
 
 class FlightController extends Controller
 {
@@ -26,7 +29,6 @@ class FlightController extends Controller
     public function index()
     {
         $letovi = Flight::all();
-
         return view('user.let', compact('letovi'));
     }
 
@@ -145,5 +147,39 @@ class FlightController extends Controller
       $data = \App\Staff::select("ime_prezime as name")->where("ime_prezime","LIKE","%{$request->input('query')}%")->get();
 
       return response()->json($data);
+    }
+
+    public function calendar()
+    {
+      $events = [];
+
+      $events[] = \Calendar::event(
+          'Event One', //event title
+          false, //full day event?
+          '2015-02-11T0800', //start time (you can also use Carbon instead of DateTime)
+          '2015-02-12T0800', //end time (you can also use Carbon instead of DateTime)
+      	0 //optionally, you can specify an event ID
+      );
+
+      $events[] = \Calendar::event(
+          "Valentine's Day", //event title
+          true, //full day event?
+          new \DateTime('2015-02-14'), //start time (you can also use Carbon instead of DateTime)
+          new \DateTime('2015-02-14'), //end time (you can also use Carbon instead of DateTime)
+      	'stringEventId' //optionally, you can specify an event ID
+      );
+
+      // $eloquentEvent = EventModel::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
+
+      $calendar = \Calendar::addEvents($events) //add an array with addEvents
+          ->addEvent($events[0], [ //set custom color fo this event
+              'color' => '#800',
+          ])->setOptions([ //set fullcalendar options
+      		'firstDay' => 1
+      	])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
+              'viewRender' => 'function() {alert("Callbacks!");}'
+          ]);
+
+      return view('user.calendar', compact('calendar'));
     }
 }

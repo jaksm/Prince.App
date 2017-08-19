@@ -26,6 +26,7 @@ Route::get('/home/flight/create/posada',array('as'=>'posada','uses'=>'FlightCont
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/calendar', 'FlightController@calendar')->name('calendar');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 Route::get('admin/users', 'AdminController@allUsers')->name('admin.users');
